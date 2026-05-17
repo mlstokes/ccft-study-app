@@ -58,16 +58,33 @@ function extractSlugFromJournalUrl(url: string): string | null {
   return match ? match[1] : null;
 }
 
-async function fetchJournalContent(slug: string): Promise<string> {
+interface JournalApiResponse {
+  postRaw: string | null;
+  postHtml: string | null;
+  media?: {
+    items?: Array<{
+      type: string;
+      sources?: Array<{ url: string }>;
+      desktop?: string;
+      duration?: string;
+    }>;
+  };
+}
+
+async function fetchJournalApi(slug: string): Promise<JournalApiResponse> {
   const apiUrl = `https://journal.crossfit.com/media-api/api/v1/media/slug/${slug}`;
   const res = await fetch(apiUrl);
   if (!res.ok) throw new Error(`Journal API ${res.status} for slug: ${slug}`);
-  const data = await res.json();
+  return res.json();
+}
+
+async function fetchJournalContent(slug: string): Promise<string> {
+  const data = await fetchJournalApi(slug);
   if (!data.postRaw && !data.postHtml) {
     throw new Error(`No content in Journal API response for slug: ${slug}`);
   }
   // postRaw is HTML content from their CMS — prefer it over postHtml
-  return data.postRaw || data.postHtml;
+  return data.postRaw || data.postHtml || "";
 }
 
 async function fetchWebContent(url: string): Promise<string> {
@@ -308,7 +325,78 @@ async function ingestMaterial(material: Material, dryRun = false) {
   }
 
   if (material.type === "VIDEO") {
-    console.log(`   ⚠️  Video — skipping text extraction (needs transcription)`);
+    const journalSlug = extractSlugFromJournalUrl(material.url);
+    if (!journalSlug) {
+      console.log(`   ⚠️  Video without Journal slug — skipping (needs manual handling)`);
+      return;
+    }
+
+    try {
+      console.log(`   Fetching video metadata from Journal API (slug: ${journalSlug})...`);
+      const apiData = await fetchJournalApi(journalSlug);
+      const description = extractTextFromHtml(apiData.postRaw || apiData.postHtml || "");
+
+      // Extract video URL and duration from media items
+      const videoItem = apiData.media?.items?.find((i) => i.type === "video");
+      const videoUrl = videoItem?.sources?.[0]?.url || videoItem?.desktop || "";
+      const duration = videoItem?.duration ? parseInt(videoItem.duration) : null;
+      const durationStr = duration
+        ? `${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, "0")}`
+        : "unknown";
+
+      console.log(`   Duration: ${durationStr} | Description: ${description.length} chars`);
+      console.log(`   Video URL: ${videoUrl ? videoUrl.substring(0, 80) + "..." : "not found"}`);
+
+      if (dryRun) {
+        console.log(`   [DRY RUN] Would write video material note`);
+        return;
+      }
+
+      // Write video material note (no sections — description is the content)
+      const materialName = sanitizeFilename(material.title);
+      const filename = materialName + ".md";
+      const filepath = join(MATERIALS_DIR, filename);
+      const domainYaml = material.domains.map((d) => `  - ${d}`).join("\n");
+
+      const content = `---
+tags:
+  - ccft
+  - ccft/material
+title: "${material.title.replace(/"/g, '\\"')}"
+author: "${material.author || ""}"
+type: VIDEO
+sourceUrl: "${material.url}"
+videoUrl: "${videoUrl}"
+duration: ${duration || ""}
+durationFormatted: "${durationStr}"
+domains:
+${domainYaml}
+primaryDomain: ${material.primaryDomain || ""}
+ingestDate: ${today()}
+ingestStatus: ingested
+sectionCount: 0
+assembledBy: claude
+---
+
+# ${material.title}
+
+## Source Info
+- **Author**: ${material.author || "N/A"}
+- **Type**: VIDEO
+- **Duration**: ${durationStr}
+- **Article URL**: ${material.url}
+- **Video URL**: ${videoUrl}
+- **Domains**: ${material.domains.join(", ")}
+
+## Description
+${description}
+`;
+
+      writeFileSync(filepath, content);
+      console.log(`   ✅ Done: video material note`);
+    } catch (err) {
+      console.error(`   ❌ Error: ${(err as Error).message}`);
+    }
     return;
   }
 
