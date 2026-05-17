@@ -1,0 +1,1001 @@
+[
+  {
+    "title": "CrossFit Kids Training Guide & Workbook",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/specialty-course-kids-training-guide",
+    "domains": ["D1","D2","D3","D4","D5","D6"],
+    "primaryDomain": null,
+    "category": "core-guide"
+  },
+  {
+    "title": "CrossFit Level 1 Training Guide",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/training-guide-compiled",
+    "domains": ["D1","D2","D3","D4","D5","D6"],
+    "primaryDomain": null,
+    "category": "core-guide"
+  },
+  {
+    "title": "CrossFit Level 2 Training Guide & Workbook",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/level-2-training-guide-and-workbook",
+    "domains": ["D1","D2","D3","D4","D5","D6"],
+    "primaryDomain": null,
+    "category": "core-guide"
+  },
+  {
+    "title": "Coaching the Aging Athlete Training Guide & Workbook",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/specialty-course-masters-training-guide",
+    "domains": ["D1","D2","D3","D4","D5","D6"],
+    "primaryDomain": null,
+    "category": "core-guide"
+  },
+  {
+    "title": "A Language to Diagnose With Kelly Starrett: Part 7",
+    "author": "Starrett K.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/a-language-to-diagnose-with-kelly-starrett-part-7",
+    "domains": ["D1","D3"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "A Metabolic Analysis of CrossFit's Elite: Part 2",
+    "author": "Various",
+    "type": "VIDEO",
+    "url": "http://journal.crossfit.com/2012/11/pepperdineparttwo.tpl",
+    "domains": ["D1","D2","D3"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Acute Exertional Compartment Syndrome with Rhabdomyolysis: Case Report and Review of Literature",
+    "author": "McKinney B. et al.",
+    "type": "WEBLINK",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5813520/",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Aging, Performance and Health",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/cfj-aging-performance-and-health",
+    "domains": ["D1","D2","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Coaching the Mental Side of CrossFit",
+    "author": "Amundson G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/coaching-the-mental-side-of-crossfit",
+    "domains": ["D1","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Competing With Diabetes - and Winning",
+    "author": "Rodriguez S.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/competing-with-diabetes-and-winning",
+    "domains": ["D1","D4","D5"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "CrossFit Training During Pregnancy & Motherhood",
+    "author": "Perkins C. & Dewalt H.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/crossfit-training-during-pregnancy-and-motherhood",
+    "domains": ["D1","D2","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Dissecting the Squat",
+    "author": "Long Z.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/cfj-dissecting-the-squat",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Don't Waste The Warm-Up",
+    "author": "Warkentin M.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/warmup-warkentin-2",
+    "domains": ["D1","D2","D3","D4","D6"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Evidence-based risk assessment and recommendations for physical activity clearance: Consensus Document",
+    "author": "Warburton D et al.",
+    "type": "PDF",
+    "url": "http://www.nrcresearchpress.com/doi/pdf/10.1139/h11-062",
+    "domains": ["D1"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Healing Tissue",
+    "author": "Starrett K.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/tissue-healing-phases",
+    "domains": ["D1","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Muscle Damage and Soreness",
+    "author": "Webster T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/muscle-damage-soreness-overview",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Pre-Participation Screening",
+    "author": "Ray M.",
+    "type": "VIDEO",
+    "url": "http://journal.crossfit.com/2009/06/pre-participation-screening.tpl",
+    "domains": ["D1"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Shoulder Impingement",
+    "author": "Starrett K.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/shoulder-impingement",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Measure of Man",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-measure-of-man",
+    "domains": ["D1","D3"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Mind Game",
+    "author": "Shrago S.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-mind-game-2",
+    "domains": ["D1","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Why use a training log?",
+    "author": "Harrison G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/why-use-a-training-log-2",
+    "domains": ["D1","D2","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "The back squat: A proposed assessment of functional deficits and technical factors that limit performance",
+    "author": "Meyer G., Kushner A. et al.",
+    "type": "PDF",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4262933/pdf/nihms639095.pdf",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "A Deft Dose of Volume",
+    "author": "Hobart J.",
+    "type": "PDF",
+    "url": "http://library.crossfit.com/free/pdf/CFJ_2016_02_Volume_Hobart.pdf",
+    "domains": ["D1","D2","D3","D4"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "A Theoretical Template For CrossFit's Programming",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/a-theoretical-template-for-crossfits-programming-2",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Adaptation for Fitness",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/adaptation-for-fitness",
+    "domains": ["D2","D3"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Benchmark Workouts",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/benchmark-workouts-2",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Conjugate CrossFit",
+    "author": "Mason C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/conjugate-crossfit",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Dissecting the Fish: Plotting Progress in Multi-Modal Training",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/dissecting-the-fish-2",
+    "domains": ["D2","D3"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "End of the Line",
+    "author": "Mason C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/end-of-the-line-2",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Energy System Development and Load Management through Rehabilitation and Return to Play Process",
+    "author": "Morrison S. et al.",
+    "type": "WEBLINK",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534159/",
+    "domains": ["D1","D2","D3","D4","D6"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Fooling Around With Fran",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/fooling-around-with-fran",
+    "domains": ["D2","D3"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Human Power Output and CrossFit Metcon Workouts",
+    "author": "Leyland T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/human-power-output-and-crossfit-metcon-workouts-2",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "IWCABTAMD",
+    "author": "Dr. Platek S., Porter J., and Walters T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/iwcabtamd-2",
+    "domains": ["D2","D3"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "No Limits",
+    "author": "Cochran C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/no-limits",
+    "domains": ["D1","D2","D5"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Periodizing for the Games",
+    "author": "Bergeron B.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/periodizing-for-the-games",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Pregnancy: A Practical Guide for Scaling",
+    "author": "Christensen N.",
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/cfj-pregnancy-a-practical-guide-for-scaling",
+    "domains": ["D2","D4"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "Scaling CrossFit Workouts",
+    "author": "Gordon J.",
+    "type": "PDF",
+    "url": "http://library.crossfit.com/free/pdf/CFJ_2015_10_Scaling_Gordon_4.pdf",
+    "domains": ["D2","D3","D4","D6"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "The High-Performance Pregnancy",
+    "author": "Nitz A.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/high-performance-pregnancy-2",
+    "domains": ["D1","D2","D3","D4"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Westside Conjugate System",
+    "author": "Simmons L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-westside-conjugate-system-2",
+    "domains": ["D2"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "VO2 Max: Not the Gold Standard?",
+    "author": "Leyland T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/vo2-max-not-the-gold-standard-2",
+    "domains": ["D1","D2","D3"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "www.crossfit.com FAQ WOD",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://www.crossfit.com/cf/faq?q=wod",
+    "domains": ["D1","D2","D3","D6"],
+    "primaryDomain": "D2",
+    "category": "domain-material"
+  },
+  {
+    "title": "An Aerobic Paradox",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-paradox-of-the-aerobic-fitness-prescription-2",
+    "domains": ["D2","D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Anatomy & Physiology Primer for CrossFit Trainers",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/anatomy-and-physiology-2",
+    "domains": ["D1","D3","D4","D5"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Anatomy and Physiology for Jocks",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/anatomy-physiology-for-jocks",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Applications of the Support on the Rings",
+    "author": "Hass T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/cfj-applications-of-the-support-on-rings",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Charting a Course to Intensity",
+    "author": "DeGain J.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/charter-degain",
+    "domains": ["D2","D3","D6"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Forcing the Issue",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/forcing-the-issue",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Fundamentals, Virtuosity, and Mastery An Open Letter to CrossFit Trainers",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/fundamentals-virtuosity-and-mastery-an-open-letter-to-crossfit-trainers",
+    "domains": ["D1","D2","D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Getting Inverted",
+    "author": "Tucker J and Hyland D.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/getting-inverted",
+    "domains": ["D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Getting Some Leverage",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/getting-some-leverage-2",
+    "domains": ["D1","D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Handstand Push-Up-Progression With Carl Paoli: Step 2",
+    "author": "Paoli C.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/handstand-push-up-progression-with-carl-paoli-part-2",
+    "domains": ["D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "How to Breathe When Squatting",
+    "author": "Horschig A.",
+    "type": "WEBLINK",
+    "url": "https://squatuniversity.com/2016/02/12/the-squat-fix-core-stability-proper-breathing/",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Proper Bench Technique",
+    "author": "Sweatt S. and Phelps-Sweatt L.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/proper-bench-technique",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Running Drills: Part 1",
+    "author": "McKenzie B.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/running-drills-with-brian-mackenzie-part-1",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Running Drills: Part 2",
+    "author": "McKenzie B.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/running-drills-with-brian-mackenzie-part-2",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Safety & Efficacy of Overhead Lifting",
+    "author": "Kilgore L., Rippetoe M. & Starrett K.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/safety-and-efficacy-of-overhead-lifting",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Spine Mechanics for Lifters",
+    "author": "Leyland T.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/spine-mechanics-for-lifters-2",
+    "domains": ["D1","D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Squatting Kinematics and Kinetics and their Application to Exercise Performance",
+    "author": "Schoenfield B.",
+    "type": "PDF",
+    "url": "http://www.academia.edu/23698675/SQUATTING_KINEMATICS_AND_KINETICS_AND_THEIR_APPLICATION_TO_EXERCISE_PERFORMANCE",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Athletic Hip",
+    "author": "Hollingsworth D.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/cfj-the-athletic-hip",
+    "domains": ["D1","D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Deeper Side of Coaching",
+    "author": "Bergeron B.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-deeper-side-of-coaching",
+    "domains": ["D3"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Glute Ham Developer",
+    "author": "Everett J.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/the-glute-ham-developer",
+    "domains": ["D2","D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Scoop and the Second Pull",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/cfj-the-scoop-and-the-second-pull",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "What Is CrossFit?",
+    "author": "Glassman G.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/what-is-crossfit",
+    "domains": ["D1","D2","D3","D4"],
+    "primaryDomain": "D3",
+    "category": "domain-material"
+  },
+  {
+    "title": "Accommodating Resistance",
+    "author": "Sweatt S. and Phelps-Sweatt L.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/accommodating-resistance",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Aberrant Vertebral Curves: Scoliosis",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://www.crossfit.com/essentials/aberrant-vertebral-curves-scoliosis",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Building Mental Toughness",
+    "author": "Hermiz J.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/building-mental-toughness-2",
+    "domains": ["D1","D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Coaches Prep Course: Macro-Micro-Macro",
+    "author": "Sherwood P., Carswell C., and Spealler C.",
+    "type": "PDF",
+    "url": "http://journal.crossfit.com/2010/09/cpc-macromicro.tpl",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Coaching the Positive",
+    "author": "Bergeron B.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/coaching-the-positive",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Fixing Common Rowing Errors",
+    "author": "Hammond G.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/fixing-common-rowing-errors",
+    "domains": ["D3","D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Infinity Wall Movement Library",
+    "author": "CrossFit",
+    "type": "VIDEO",
+    "url": "https://www.youtube.com/playlist?list=PLdWvFCOAvyr1qYhgPz_-wnCcxTO7VHdFo",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Movement 101",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/movement-101-2",
+    "domains": ["D1","D3","D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Pursuit of Excellence With Greg Glassman",
+    "author": null,
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/pursuit-of-excellence-with-greg-glassman",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Emotional Bank Account",
+    "author": "Bergeron B.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/the-emotional-bank-account",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Pursuit of Excellence",
+    "author": "Bergeron B.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-pursuit-of-excellence-2",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Strategies for a Seven Minute 2K on the Concept II Rower",
+    "author": "Glassman G.",
+    "type": "PDF",
+    "url": "http://library.crossfit.com/free/pdf/Row2K_Nov02.pdf",
+    "domains": ["D4"],
+    "primaryDomain": "D4",
+    "category": "domain-material"
+  },
+  {
+    "title": "Beyond Calories",
+    "author": "Giardina M.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/calories-giardina-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Cancer, Carbs, and Controversy",
+    "author": "Saline B.",
+    "type": "PDF",
+    "url": "http://library.crossfit.com/free/pdf/CFJ_2016_06_Cancer_Saline4.pdf",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "How it's made: Cholesterol production in your body",
+    "author": "Corliss J.",
+    "type": "WEBLINK",
+    "url": "https://www.health.harvard.edu/heart-health/how-its-made-cholesterol-production-in-your-body",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "How to Understand and Use the Nutrition Facts Label",
+    "author": "US FDA",
+    "type": "WEBLINK",
+    "url": "https://www.fda.gov/food/labelingnutrition/ucm274593.htm",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Low Carbs and Lipids",
+    "author": "Eades M.",
+    "type": "WEBLINK",
+    "url": "https://proteinpower.com/drmike/2008/01/07/low-carbs-and-lipids/",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Make Your Life Better: Get Horizontal",
+    "author": "Beers E.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/make-your-life-better-get-horizontal-2",
+    "domains": ["D1","D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Milking Fact From Intolerance",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/milking-fact-from-intolerance-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "My Experiments With Intermittent Fasting",
+    "author": "Berardi J.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/my-experiments-with-intermittent-fasting-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Nutrition Brief: Carbohydrate Selections",
+    "author": "Synkowski EC.",
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/nutrition-brief-carbohydrate-selections-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Nutrition Brief: How much Food Should I Eat?",
+    "author": "Synkowski E.C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/nutrition-brief-how-much-food-should-i-eat",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Nutrition Brief: Insulin and Blood Sugar Regulation",
+    "author": "Gary J. & Synkowski E.C.",
+    "type": "WEBLINK",
+    "url": "https://journal.crossfit.com/article/nutrition-brief-insulin-and-blood-sugar-regulation-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Nutrition Brief: Pros & Cons of Intermittent Fasting",
+    "author": "Synkowski E.C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/nutrition-brief-pros-and-cons-of-intermittent-fasting-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Nutrition Data",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://nutritiondata.self.com/",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Race-Day Fueling",
+    "author": "Wunderle M.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/race-day-fueling",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Simple Nutrition: Part 1",
+    "author": "Synkowski EC.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/simple-nutrition-part-1",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Simple Nutrition: Part 2",
+    "author": "Synkowski EC.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/simple-nutrition-part-2",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Simple Nutrition: Part 3",
+    "author": "Synkowski EC.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/simple-nutrition-part-3",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Simple Nutrition: Part 4",
+    "author": "Synkowski EC.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/simple-nutrition-part-4",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Simple Nutrition: Part 5",
+    "author": "Synkowski EC.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/simple-nutrition-part-5",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Statement of the Third International Exercise-Associated Hyponatremia Consensus Development Conference",
+    "author": null,
+    "type": "WEBLINK",
+    "url": "https://journals.lww.com/cjsportsmed/Fulltext/2015/07000/Statement_of_the_Third_International.2.aspx",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Sugar Bombs",
+    "author": "Beers E.",
+    "type": "PDF",
+    "url": "http://library.crossfit.com/free/pdf/CFJ_2015_07_Sugar_Beers6.pdf",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Vitamin D and your health: Breaking old rules, raising new hopes",
+    "author": "Harvard Men's Health Watch",
+    "type": "WEBLINK",
+    "url": "https://www.health.harvard.edu/newsletter_article/vitamin-d-and-your-health-breaking-old-rules-raising-new-hopes",
+    "domains": ["D1","D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "What Is the Glycemic Index?",
+    "author": "Eades M.",
+    "type": "WEBLINK",
+    "url": "https://proteinpower.com/blog/what-is-the-glycemic-index/",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Importance of Maintaining a Low Omega-6/Omega-3 Ratio for Reducing Inflammation",
+    "author": "DiNicolantonio J. & O'Keefe J.",
+    "type": "WEBLINK",
+    "url": "https://www.crossfit.com/essentials/importance-of-maintaining-a-low-omega-6-omega-3-ratio-for-reducing-inflammation",
+    "domains": ["D5"],
+    "primaryDomain": "D5",
+    "category": "domain-material"
+  },
+  {
+    "title": "Blood Spill Clean-Up Procedure",
+    "author": "CrossFit",
+    "type": "PDF",
+    "url": "http://journal.crossfit.com/2012/10/bloodspillcleanup.tpl",
+    "domains": ["D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Day One: Screening New Clients",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/day-one-kilgore-2",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Evacuation Plans and Procedures eTool",
+    "author": "OSHA",
+    "type": "WEBLINK",
+    "url": "https://www.osha.gov/SLTC/etools/evacuation/checklists/eap.html",
+    "domains": ["D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Health and Safety: A Primer for CrossFit Trainers",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/health-safety-primer-2",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Injuries among Weightlifters and Powerlifters: A Systematic Review",
+    "author": "Aasa U. et al.",
+    "type": "PDF",
+    "url": "https://bjsm.bmj.com/content/bjsports/51/4/211.full.pdf",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Injuries and Affiliates: Have a Plan",
+    "author": "Galligani C.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/injury-galligani-2",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Protecting Your Business: The Waiver",
+    "author": "Ames M.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/protecting-your-business-the-waiver-2",
+    "domains": ["D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Recommended Practices for Safety and Health Programs",
+    "author": "OSHA",
+    "type": "WEBLINK",
+    "url": "https://www.osha.gov/shpguidelines/education-training.html",
+    "domains": ["D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Safety: For Athletes and Trainers",
+    "author": "Kilgore L.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/safety-for-athletes-and-trainers",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Scope of Practice - CCFT Handbook",
+    "author": null,
+    "type": "PDF",
+    "url": "https://assets.crossfit.com/pdfs/certifications/CCFT_CandidateHandbook.pdf",
+    "domains": ["D1","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "Skin Infections and the CrossFit Athlete",
+    "author": "Ray M.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/skin-infections-and-the-crossfit-athlete",
+    "domains": ["D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  },
+  {
+    "title": "The Role of Bench Press in Strength Training",
+    "author": "Starr B.",
+    "type": "PDF",
+    "url": "https://journal.crossfit.com/article/the-role-of-bench-press-in-strength-training-2",
+    "domains": ["D3","D4","D6"],
+    "primaryDomain": "D6",
+    "category": "domain-material"
+  }
+]
