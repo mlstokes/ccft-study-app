@@ -57,6 +57,7 @@ export default function ReviewPage() {
     rejected: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [showPage, setShowPage] = useState(true);
   const [editing, setEditing] = useState(false);
   const [editDomains, setEditDomains] = useState("");
   const [editThing, setEditThing] = useState("");
@@ -235,9 +236,25 @@ export default function ReviewPage() {
               </>
             )}
             {item.page_number && (
-              <span className="ml-auto">p. {item.page_number}</span>
+              <button
+                onClick={() => setShowPage(!showPage)}
+                className="ml-auto text-blue-600 hover:underline"
+              >
+                p. {item.page_number} {showPage ? "▼" : "▶"}
+              </button>
             )}
           </div>
+
+          {/* PDF page image */}
+          {showPage && item.page_number && (
+            <div className="rounded-lg border border-zinc-200 overflow-hidden dark:border-zinc-800">
+              <img
+                src={`/pages/page-${String(item.page_number + 2).padStart(3, "0")}.jpg`}
+                alt={`Page ${item.page_number}`}
+                className="w-full"
+              />
+            </div>
+          )}
 
           {/* Source text */}
           <Card>
