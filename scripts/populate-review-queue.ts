@@ -1,24 +1,22 @@
 #!/usr/bin/env npx tsx
 /**
- * Populate Review Queue — extracts full text from the L1 Training Guide PDF,
- * splits by page markers, then by paragraph, maps to articles via TOC
- * page ranges, and inserts into review_queue.
+ * Populate Review Queue — reads pre-extracted L1 Training Guide text,
+ * splits into clean paragraphs by page, maps to articles via TOC,
+ * and inserts into review_queue.
  *
  * Usage:
  *   npx tsx scripts/populate-review-queue.ts
  *   npx tsx scripts/populate-review-queue.ts --dry-run
+ *   npx tsx scripts/populate-review-queue.ts --clear   # delete all existing rows first
  */
 
 import { readFileSync } from "fs";
 import { join } from "path";
-import { execSync } from "child_process";
 import { createClient } from "@supabase/supabase-js";
 
-const PDF_PATH = join(
-  process.env.HOME || "~",
-  "Documents/CCFT - CrossFit Level 1 Training Guide.pdf"
-);
+const TEXT_PATH = join(__dirname, "l1-full-text.txt");
 const DRY_RUN = process.argv.includes("--dry-run");
+const CLEAR = process.argv.includes("--clear");
 
 // Load env
 const envPath = join(__dirname, "..", ".env.local");
@@ -84,123 +82,190 @@ function findArticle(page: number): ArticleDef | null {
 }
 
 // ---------------------------------------------------------------
-// Extract and split full PDF text by page
+// Noise detection
 // ---------------------------------------------------------------
 
-function extractPages(): Map<number, string> {
-  const fullText = execSync(`pdftotext "${PDF_PATH}" -`, {
-    encoding: "utf-8",
-    maxBuffer: 50 * 1024 * 1024,
-  });
+function isNoise(line: string): boolean {
+  const t = line.trim();
+  if (!t) return true;
+  // Page footers
+  if (/^Copyright © \d{4}/.test(t)) return true;
+  if (/^V\d+[A-Z]/.test(t)) return true;
+  // Category headers (standalone on their own line)
+  if (/^(METHODOLOGY|MOVEMENTS|TRAINER GUIDANCE|MOVEMENT GUIDE)$/.test(t)) return true;
+  // Page header
+  if (/^Level 1 Training Guide$/.test(t)) return true;
+  // "continued" lines
+  if (/,\s*continued\s*$/.test(t)) return true;
+  // "Originally published" lines
+  if (/^Originally published/.test(t)) return true;
+  // Standalone "CrossFit" logo text
+  if (/^CrossFit[®]?$/.test(t)) return true;
+  return false;
+}
 
-  const pages = new Map<number, string>();
-  // Split by page markers: "| N of 255"
-  const pageRegex = /\|\s*(\d+)\s*of\s*255/g;
-  let lastIdx = 0;
-  let lastPage = 0;
-  let match;
-
-  while ((match = pageRegex.exec(fullText)) !== null) {
-    const pageNum = parseInt(match[1]);
-    if (lastPage > 0) {
-      pages.set(lastPage, fullText.substring(lastIdx, match.index).trim());
+function isSidebar(block: string): boolean {
+  // Sidebars are typically short, broken across many short lines,
+  // often quotes ending with —COACH GLASSMAN
+  if (/—COACH GLASSMAN/.test(block)) return true;
+  // Short multi-line blocks where most lines are very short (sidebar column)
+  const lines = block.split("\n");
+  if (lines.length >= 4) {
+    const shortLines = lines.filter((l) => l.trim().length < 40);
+    if (shortLines.length / lines.length > 0.7 && !isAllCaps(lines[0].trim())) {
+      return true;
     }
-    lastIdx = match.index + match[0].length;
-    lastPage = pageNum;
   }
-  // Capture last page
-  if (lastPage > 0) {
-    pages.set(lastPage, fullText.substring(lastIdx).trim());
-  }
+  return false;
+}
 
-  return pages;
+function isAllCaps(s: string): boolean {
+  const letters = s.replace(/[^A-Za-z]/g, "");
+  return letters.length > 3 && letters === letters.toUpperCase();
 }
 
 // ---------------------------------------------------------------
-// Split page text into paragraphs
+// Parse full text into pages → paragraphs
 // ---------------------------------------------------------------
 
-function splitParagraphs(
-  text: string
-): { heading: string | null; body: string }[] {
-  // Clean noise
-  const lines = text.split("\n");
-  const cleaned: string[] = [];
+interface Paragraph {
+  heading: string | null;
+  body: string;
+  page: number;
+}
 
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      cleaned.push("");
-      continue;
-    }
-    // Skip headers/footers
-    if (/^Level 1 Training Guide/.test(trimmed)) continue;
-    if (/^Copyright ©/.test(trimmed)) continue;
-    if (/^V\d+[A-Z]/.test(trimmed)) continue;
-    if (/^METHODOLOGY$/.test(trimmed)) continue;
-    if (/^MOVEMENTS$/.test(trimmed)) continue;
-    if (/^TRAINER GUIDANCE$/.test(trimmed)) continue;
-    if (/^MOVEMENT GUIDE$/.test(trimmed)) continue;
-    if (/continued$/.test(trimmed) && trimmed.length < 60) continue;
-    if (/^Originally published/.test(trimmed)) continue;
-    if (/^CrossFit$/.test(trimmed)) continue;
-    cleaned.push(trimmed);
+function parseText(): Paragraph[] {
+  const fullText = readFileSync(TEXT_PATH, "utf-8");
+
+  // Find all page markers: "| N of 255"
+  // The marker is a PAGE FOOTER — content for page N appears BEFORE the marker.
+  // So text between marker N and marker N+1 is the content of page N+1.
+  const pagePattern = /\|\s*(\d+)\s*of\s*255/g;
+  const markers: { page: number; endIndex: number; startIndex: number }[] = [];
+  let m;
+  while ((m = pagePattern.exec(fullText)) !== null) {
+    markers.push({
+      page: parseInt(m[1]),
+      startIndex: m.index,
+      endIndex: m.index + m[0].length,
+    });
   }
 
-  // Join into text, then split on blank lines
-  const rejoined = cleaned.join("\n");
-  const blocks = rejoined
-    .split(/\n\n+/)
-    .map((b) => b.trim())
-    .filter((b) => b.length > 20);
+  // Build page text map: page N content = text from after marker(N-1) to start of marker(N)
+  const pages = new Map<number, string>();
+  for (let i = 0; i < markers.length; i++) {
+    const pageNum = markers[i].page;
+    const contentStart = i > 0 ? markers[i - 1].endIndex : 0;
+    const contentEnd = markers[i].startIndex;
+    pages.set(pageNum, fullText.substring(contentStart, contentEnd));
+  }
+  // Last page: content after the last marker
+  if (markers.length > 0) {
+    const last = markers[markers.length - 1];
+    pages.set(last.page + 1, fullText.substring(last.endIndex));
+  }
 
-  const result: { heading: string | null; body: string }[] = [];
+  const allParagraphs: Paragraph[] = [];
 
-  for (const block of blocks) {
-    const lines = block.split("\n");
-    const firstLine = lines[0].trim();
+  for (const [pageNum, pageText] of [...pages.entries()].sort((a, b) => a[0] - b[0])) {
 
-    // Check if first line is ALL-CAPS heading
-    const isUpperCase =
-      firstLine.length > 3 &&
-      firstLine.length < 100 &&
-      firstLine.replace(/[^A-Za-z]/g, "").length > 0 &&
-      firstLine === firstLine.toUpperCase();
+    // Skip pages outside article range
+    if (!findArticle(pageNum)) continue;
 
-    if (isUpperCase && lines.length > 1) {
-      result.push({
-        heading: firstLine,
-        body: lines
-          .slice(1)
+    // Clean lines
+    const lines = pageText.split("\n");
+    const cleanedLines: string[] = [];
+    for (const line of lines) {
+      if (isNoise(line)) continue;
+      cleanedLines.push(line);
+    }
+
+    // Join back, then split into blocks.
+    // Split on blank lines AND before ALL-CAPS heading lines.
+    const cleaned = cleanedLines.join("\n");
+    // Insert a double-newline before any ALL-CAPS line that looks like a heading
+    const withHeadingBreaks = cleaned.replace(
+      /\n([A-Z][A-Z\s,.:;'"\-—()\/&?!]{3,})\n/g,
+      "\n\n$1\n"
+    );
+    const blocks = withHeadingBreaks.split(/\n\n+/).map((b) => b.trim()).filter(Boolean);
+
+    for (const block of blocks) {
+      // Skip sidebars
+      if (isSidebar(block)) continue;
+
+      // Skip very short fragments (< 40 chars and not a heading)
+      if (block.length < 40 && !isAllCaps(block)) continue;
+
+      const lines = block.split("\n");
+      const firstLine = lines[0].trim();
+
+      // Check if first line is ALL-CAPS heading
+      if (isAllCaps(firstLine) && firstLine.length < 120) {
+        const bodyLines = lines.slice(1);
+        const body = bodyLines
+          .map((l) => l.trim())
           .join(" ")
           .replace(/\s+/g, " ")
-          .trim(),
-      });
-    } else if (isUpperCase && lines.length === 1) {
-      // Standalone heading — will be picked up by the next paragraph
-      // Store as heading-only for now
-      result.push({ heading: firstLine, body: "" });
-    } else {
-      // Regular paragraph — join wrapped lines
-      result.push({
-        heading: null,
-        body: lines.join(" ").replace(/\s+/g, " ").trim(),
-      });
+          .trim();
+
+        if (body.length >= 30) {
+          allParagraphs.push({ heading: firstLine, body, page: pageNum });
+        } else if (body.length > 0) {
+          // Heading with very short body — might be a figure caption or label
+          allParagraphs.push({ heading: firstLine, body, page: pageNum });
+        }
+        // Standalone heading with no body — skip (will be context for next paragraph)
+      } else {
+        // Regular paragraph — join wrapped lines
+        const body = lines
+          .map((l) => l.trim())
+          .join(" ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (body.length >= 30) {
+          allParagraphs.push({ heading: null, body, page: pageNum });
+        }
+      }
     }
   }
 
-  // Merge standalone headings with the following paragraph
-  const merged: { heading: string | null; body: string }[] = [];
-  for (let i = 0; i < result.length; i++) {
-    if (result[i].body === "" && result[i].heading && i + 1 < result.length) {
-      merged.push({
-        heading: result[i].heading,
-        body: result[i + 1].body,
-      });
-      i++; // skip next
-    } else if (result[i].body) {
-      merged.push(result[i]);
+  return allParagraphs;
+}
+
+// ---------------------------------------------------------------
+// Merge paragraphs that were split across page boundaries
+// ---------------------------------------------------------------
+
+function mergeAcrossPages(paragraphs: Paragraph[]): Paragraph[] {
+  const merged: Paragraph[] = [];
+
+  for (let i = 0; i < paragraphs.length; i++) {
+    const current = paragraphs[i];
+
+    // Check if next paragraph is a continuation (starts with lowercase,
+    // no heading, and current doesn't end with sentence-ending punctuation)
+    if (i + 1 < paragraphs.length) {
+      const next = paragraphs[i + 1];
+      const endsClean = /[.!?)"]\s*$/.test(current.body);
+      const nextStartsLower = /^[a-z]/.test(next.body);
+      const nextHasNoHeading = !next.heading;
+      const differentPage = next.page !== current.page;
+
+      if (!endsClean && nextStartsLower && nextHasNoHeading && differentPage) {
+        // Merge
+        merged.push({
+          heading: current.heading,
+          body: current.body + " " + next.body,
+          page: current.page,
+        });
+        i++; // skip next
+        continue;
+      }
     }
+
+    merged.push(current);
   }
 
   return merged;
@@ -211,70 +276,75 @@ function splitParagraphs(
 // ---------------------------------------------------------------
 
 async function main() {
-  console.log("Extracting L1 Training Guide for review queue...");
-  console.log(`Mode: ${DRY_RUN ? "DRY RUN" : "LIVE"}`);
+  console.log("Populating review queue from L1 Training Guide...");
+  console.log("Mode: " + (DRY_RUN ? "DRY RUN" : "LIVE"));
 
-  const pages = extractPages();
-  console.log(`Extracted ${pages.size} pages from PDF`);
+  if (CLEAR && !DRY_RUN) {
+    console.log("Clearing existing review_queue rows...");
+    const { error } = await supabase
+      .from("review_queue")
+      .delete()
+      .eq("material", "CrossFit Level 1 Training Guide");
+    if (error) console.error("Clear error:", error.message);
+    else console.log("Cleared.");
+  }
 
-  let totalParagraphs = 0;
+  let paragraphs = parseText();
+  console.log("Parsed " + paragraphs.length + " raw paragraphs");
+
+  paragraphs = mergeAcrossPages(paragraphs);
+  console.log("After cross-page merge: " + paragraphs.length + " paragraphs");
+
   let inserted = 0;
-  let currentArticleName = "";
+  let currentArticle = "";
   let articleOrder = 0;
+  let lastHeading: string | null = null;
 
-  for (const [pageNum, pageText] of [...pages.entries()].sort(
-    (a, b) => a[0] - b[0]
-  )) {
-    const article = findArticle(pageNum);
+  for (const para of paragraphs) {
+    const article = findArticle(para.page);
     if (!article) continue;
 
-    if (article.article !== currentArticleName) {
-      currentArticleName = article.article;
+    if (article.article !== currentArticle) {
+      currentArticle = article.article;
       articleOrder = 0;
-      console.log(
-        `\n  ${article.category} → ${article.article} (pp. ${article.startPage}-${article.endPage})`
-      );
+      lastHeading = null;
+      console.log("\n  " + article.category + " → " + article.article + " (pp. " + article.startPage + "-" + article.endPage + ")");
     }
 
-    const paragraphs = splitParagraphs(pageText);
+    articleOrder++;
 
-    for (const para of paragraphs) {
-      if (!para.body || para.body.length < 30) continue;
+    // Track last seen heading for context
+    const heading = para.heading || lastHeading;
+    if (para.heading) lastHeading = para.heading;
 
-      articleOrder++;
-      totalParagraphs++;
+    const row = {
+      material: "CrossFit Level 1 Training Guide",
+      category: article.category,
+      article: article.article,
+      section_heading: heading,
+      paragraph_order: articleOrder,
+      body: para.body,
+      page_number: para.page,
+      proposed_domains: article.defaultDomains,
+      proposed_thing_to_learn: null as string | null,
+      status: "pending",
+    };
 
-      const row = {
-        material: "CrossFit Level 1 Training Guide",
-        category: article.category,
-        article: article.article,
-        section_heading: para.heading,
-        paragraph_order: articleOrder,
-        body: para.body,
-        page_number: pageNum,
-        proposed_domains: article.defaultDomains,
-        proposed_thing_to_learn: null as string | null,
-        status: "pending",
-      };
-
-      if (DRY_RUN) {
-        const preview = para.body.substring(0, 80);
-        console.log(
-          `    [${articleOrder}] p.${pageNum} ${para.heading ?? "(cont)"}: ${preview}...`
-        );
+    if (DRY_RUN) {
+      const preview = para.body.substring(0, 90);
+      console.log("    [" + articleOrder + "] p." + para.page + " " + (heading ?? "(intro)") + ": " + preview + "...");
+    } else {
+      const { error } = await supabase.from("review_queue").insert(row);
+      if (error) {
+        console.error("  ERROR p." + para.page + ": " + error.message);
       } else {
-        const { error } = await supabase.from("review_queue").insert(row);
-        if (error) {
-          console.error(`  ERROR p.${pageNum}: ${error.message}`);
-        } else {
-          inserted++;
-        }
+        inserted++;
       }
     }
   }
 
-  console.log(`\n\nTotal paragraphs: ${totalParagraphs}`);
-  if (!DRY_RUN) console.log(`Inserted: ${inserted}`);
+  console.log("\n\nTotal paragraphs: " + paragraphs.length);
+  if (!DRY_RUN) console.log("Inserted: " + inserted);
   console.log("Done.");
 }
 
