@@ -79,7 +79,7 @@
     "title": "A Metabolic Analysis of CrossFit's Elite: Part 2",
     "author": "Various",
     "type": "VIDEO",
-    "url": "http://journal.crossfit.com/2012/11/pepperdineparttwo.tpl",
+    "url": "https://www.youtube.com/watch?v=222T2LQhvJ8",
     "domains": [
       "D1",
       "D2",
@@ -215,10 +215,21 @@
     "category": "domain-material"
   },
   {
-    "title": "Pre-Participation Screening",
+    "title": "Pre-Participation Screening: Part 1",
     "author": "Ray M.",
     "type": "VIDEO",
-    "url": "http://journal.crossfit.com/2009/06/pre-participation-screening.tpl",
+    "url": "https://journal.crossfit.com/article/pre-participation-screening-part-1",
+    "domains": [
+      "D1"
+    ],
+    "primaryDomain": "D1",
+    "category": "domain-material"
+  },
+  {
+    "title": "Pre-Participation Screening: Part 2",
+    "author": "Ray M.",
+    "type": "VIDEO",
+    "url": "https://journal.crossfit.com/article/pre-participation-screening-part-2",
     "domains": [
       "D1"
     ],
@@ -978,7 +989,7 @@
     "title": "Low Carbs and Lipids",
     "author": "Eades M.",
     "type": "WEBLINK",
-    "url": "https://proteinpower.com/drmike/2008/01/07/low-carbs-and-lipids/",
+    "url": "https://proteinpower.com/low-carbs-and-lipids/",
     "domains": [
       "D5"
     ],

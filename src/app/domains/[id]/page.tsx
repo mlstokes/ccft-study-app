@@ -18,7 +18,7 @@ async function getDomain(id: string) {
 async function getTasks(domainId: string) {
   const { data, error } = await supabase
     .from("tasks")
-    .select("*, abilities(*)")
+    .select("*, abilities(*, content_section_abilities(count))")
     .eq("domain_id", domainId)
     .order("sort_order")
     .order("sort_order", { referencedTable: "abilities" });
@@ -70,6 +70,7 @@ export default async function DomainPage({
               id: string;
               code: string;
               name: string;
+              content_section_abilities: { count: number }[];
             }[];
           }) => (
             <Card key={task.id}>
@@ -82,19 +83,35 @@ export default async function DomainPage({
               <CardContent>
                 <ul className="space-y-2">
                   {task.abilities.map(
-                    (ability: { id: string; code: string; name: string }) => (
-                      <li
-                        key={ability.id}
-                        className="flex gap-3 text-sm leading-relaxed"
-                      >
-                        <span className="shrink-0 font-mono text-xs text-zinc-400 pt-0.5">
-                          {ability.code}
-                        </span>
-                        <span className="text-zinc-700 dark:text-zinc-300">
-                          {ability.name}
-                        </span>
-                      </li>
-                    )
+                    (ability: {
+                      id: string;
+                      code: string;
+                      name: string;
+                      content_section_abilities: { count: number }[];
+                    }) => {
+                      const sectionCount =
+                        ability.content_section_abilities[0]?.count ?? 0;
+                      return (
+                        <li key={ability.id}>
+                          <Link
+                            href={`/abilities/${ability.id}`}
+                            className="flex gap-3 text-sm leading-relaxed rounded-md px-2 py-1 -mx-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          >
+                            <span className="shrink-0 font-mono text-xs text-zinc-400 pt-0.5">
+                              {ability.code}
+                            </span>
+                            <span className="flex-1 text-zinc-700 dark:text-zinc-300">
+                              {ability.name}
+                            </span>
+                            <span className="shrink-0 text-xs text-zinc-400 pt-0.5">
+                              {sectionCount > 0
+                                ? `${sectionCount} sec`
+                                : "—"}
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    }
                   )}
                 </ul>
               </CardContent>

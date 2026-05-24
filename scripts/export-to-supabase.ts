@@ -180,7 +180,10 @@ function readAllNotes<T>(dir: string): ParsedNote<T>[] {
 
 async function exportMaterials(
   supabase: SupabaseClient
-): Promise<Map<string, string>> {
+): Promise<{
+  titleToId: Map<string, string>;
+  normalizedToId: Map<string, string>;
+}> {
   console.log("\n=== Exporting Materials ===");
   const notes = readAllNotes<MaterialFrontmatter>(MATERIALS_DIR);
 

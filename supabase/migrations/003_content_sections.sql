@@ -68,6 +68,13 @@ create table content_section_courses (
 );
 
 -- ============================================================
+-- UNIQUE CONSTRAINTS (for upsert idempotency)
+-- ============================================================
+
+-- Title is the natural key for materials (vault filenames derive from title)
+alter table study_materials add constraint uq_study_materials_title unique (title);
+
+-- ============================================================
 -- INDEXES
 -- ============================================================
 
