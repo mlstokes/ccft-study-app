@@ -33,6 +33,9 @@ function Nav() {
           <Link href="/materials" className="hover:text-zinc-900 dark:hover:text-zinc-100">
             Materials
           </Link>
+          <Link href="/review" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            Review
+          </Link>
         </nav>
       </div>
     </header>
