@@ -99,8 +99,8 @@ export default function ReviewPage() {
       .from("review_queue")
       .select("*")
       .eq("status", "pending")
+      .order("page_number")
       .order("paragraph_order")
-      .order("article")
       .limit(1)
       .single();
 
