@@ -38,6 +38,7 @@ type ReviewItem = {
   final_thing_to_learn: string | null;
   reviewer_notes: string | null;
   keep_image: boolean;
+  image_crop: { x: number; y: number; w: number; h: number } | null;
 };
 
 type Counts = {
@@ -59,6 +60,9 @@ export default function ReviewPage() {
   });
   const [loading, setLoading] = useState(true);
   const [showPage, setShowPage] = useState(true);
+  const [cropping, setCropping] = useState(false);
+  const [cropStart, setCropStart] = useState<{ x: number; y: number } | null>(null);
+  const [cropBox, setCropBox] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
   const [editing, setEditing] = useState(false);
   const [editDomains, setEditDomains] = useState("");
   const [editThing, setEditThing] = useState("");
@@ -246,35 +250,179 @@ export default function ReviewPage() {
             )}
           </div>
 
-          {/* PDF page image */}
+          {/* PDF page image with crop tool */}
           {showPage && item.page_number && (
             <div className="space-y-2">
-              <div className="rounded-lg border border-zinc-200 overflow-hidden dark:border-zinc-800">
+              <div
+                className="relative rounded-lg border border-zinc-200 overflow-hidden dark:border-zinc-800 select-none"
+                onMouseDown={(e) => {
+                  if (!cropping) return;
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  setCropStart({ x, y });
+                  setCropBox(null);
+                }}
+                onMouseMove={(e) => {
+                  if (!cropping || !cropStart) return;
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  setCropBox({
+                    x: Math.min(cropStart.x, x),
+                    y: Math.min(cropStart.y, y),
+                    w: Math.abs(x - cropStart.x),
+                    h: Math.abs(y - cropStart.y),
+                  });
+                }}
+                onMouseUp={() => {
+                  setCropStart(null);
+                }}
+              >
                 <img
                   src={`/pages/page-${String(item.page_number + 2).padStart(3, "0")}.jpg`}
                   alt={`Page ${item.page_number}`}
                   className="w-full"
+                  draggable={false}
                 />
+                {/* Show existing saved crop */}
+                {!cropping && item.image_crop && (
+                  <div
+                    className="absolute border-2 border-green-500 bg-green-500/10 pointer-events-none"
+                    style={{
+                      left: `${item.image_crop.x}%`,
+                      top: `${item.image_crop.y}%`,
+                      width: `${item.image_crop.w}%`,
+                      height: `${item.image_crop.h}%`,
+                    }}
+                  />
+                )}
+                {/* Show active crop selection */}
+                {cropping && cropBox && (
+                  <div
+                    className="absolute border-2 border-blue-500 bg-blue-500/20 pointer-events-none"
+                    style={{
+                      left: `${cropBox.x}%`,
+                      top: `${cropBox.y}%`,
+                      width: `${cropBox.w}%`,
+                      height: `${cropBox.h}%`,
+                    }}
+                  />
+                )}
+                {cropping && (
+                  <div className="absolute inset-0 cursor-crosshair" />
+                )}
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                className={
-                  item.keep_image
-                    ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
-                    : "text-zinc-500"
-                }
-                onClick={async () => {
-                  const newVal = !item.keep_image;
-                  await supabase
-                    .from("review_queue")
-                    .update({ keep_image: newVal, updated_at: new Date().toISOString() })
-                    .eq("id", item.id);
-                  setItem({ ...item, keep_image: newVal });
-                }}
-              >
-                {item.keep_image ? "Image Kept" : "Keep Image for App"}
-              </Button>
+              <div className="flex gap-2">
+                {!cropping ? (
+                  <>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className={
+                        item.keep_image
+                          ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
+                          : "text-zinc-500"
+                      }
+                      onClick={async () => {
+                        await supabase
+                          .from("review_queue")
+                          .update({
+                            keep_image: true,
+                            image_crop: null,
+                            updated_at: new Date().toISOString(),
+                          })
+                          .eq("id", item.id);
+                        setItem({ ...item, keep_image: true, image_crop: null });
+                      }}
+                    >
+                      {item.keep_image && !item.image_crop
+                        ? "Full Page Kept"
+                        : "Keep Full Page"}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-blue-600"
+                      onClick={() => {
+                        setCropping(true);
+                        setCropBox(item.image_crop);
+                      }}
+                    >
+                      {item.image_crop ? "Re-crop" : "Crop Region"}
+                    </Button>
+                    {item.keep_image && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-zinc-400"
+                        onClick={async () => {
+                          await supabase
+                            .from("review_queue")
+                            .update({
+                              keep_image: false,
+                              image_crop: null,
+                              updated_at: new Date().toISOString(),
+                            })
+                            .eq("id", item.id);
+                          setItem({
+                            ...item,
+                            keep_image: false,
+                            image_crop: null,
+                          });
+                        }}
+                      >
+                        Remove Image
+                      </Button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      size="sm"
+                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                      disabled={!cropBox || cropBox.w < 2 || cropBox.h < 2}
+                      onClick={async () => {
+                        if (!cropBox) return;
+                        const rounded = {
+                          x: Math.round(cropBox.x * 10) / 10,
+                          y: Math.round(cropBox.y * 10) / 10,
+                          w: Math.round(cropBox.w * 10) / 10,
+                          h: Math.round(cropBox.h * 10) / 10,
+                        };
+                        await supabase
+                          .from("review_queue")
+                          .update({
+                            keep_image: true,
+                            image_crop: rounded,
+                            updated_at: new Date().toISOString(),
+                          })
+                          .eq("id", item.id);
+                        setItem({
+                          ...item,
+                          keep_image: true,
+                          image_crop: rounded,
+                        });
+                        setCropping(false);
+                        setCropBox(null);
+                      }}
+                    >
+                      Save Crop
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setCropping(false);
+                        setCropBox(null);
+                        setCropStart(null);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           )}
 
