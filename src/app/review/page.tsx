@@ -37,6 +37,7 @@ type ReviewItem = {
   final_domains: string[] | null;
   final_thing_to_learn: string | null;
   reviewer_notes: string | null;
+  keep_image: boolean;
 };
 
 type Counts = {
@@ -247,12 +248,33 @@ export default function ReviewPage() {
 
           {/* PDF page image */}
           {showPage && item.page_number && (
-            <div className="rounded-lg border border-zinc-200 overflow-hidden dark:border-zinc-800">
-              <img
-                src={`/pages/page-${String(item.page_number + 2).padStart(3, "0")}.jpg`}
-                alt={`Page ${item.page_number}`}
-                className="w-full"
-              />
+            <div className="space-y-2">
+              <div className="rounded-lg border border-zinc-200 overflow-hidden dark:border-zinc-800">
+                <img
+                  src={`/pages/page-${String(item.page_number + 2).padStart(3, "0")}.jpg`}
+                  alt={`Page ${item.page_number}`}
+                  className="w-full"
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className={
+                  item.keep_image
+                    ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-400"
+                    : "text-zinc-500"
+                }
+                onClick={async () => {
+                  const newVal = !item.keep_image;
+                  await supabase
+                    .from("review_queue")
+                    .update({ keep_image: newVal, updated_at: new Date().toISOString() })
+                    .eq("id", item.id);
+                  setItem({ ...item, keep_image: newVal });
+                }}
+              >
+                {item.keep_image ? "Image Kept" : "Keep Image for App"}
+              </Button>
             </div>
           )}
 
