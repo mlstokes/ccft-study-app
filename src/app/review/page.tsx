@@ -12,6 +12,16 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+const DOMAIN_LABELS: Record<string, string> = {
+  D1: "D1 — Screening & Assessment",
+  D2: "D2 — Programming",
+  D3: "D3 — Educating",
+  D4: "D4 — Training",
+  D5: "D5 — Leadership & Management",
+  D6: "D6 — Lifestyle Education",
+  D7: "D7 — Professional Responsibilities",
+};
+
 type ReviewItem = {
   id: string;
   material: string;
@@ -252,13 +262,13 @@ export default function ReviewPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-medium text-zinc-500">
                     Domains:
                   </span>
                   {item.proposed_domains.map((d) => (
                     <Badge key={d} variant="secondary" className="text-xs">
-                      {d}
+                      {DOMAIN_LABELS[d] ?? d}
                     </Badge>
                   ))}
                 </div>
